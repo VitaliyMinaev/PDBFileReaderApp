@@ -35,6 +35,7 @@ namespace PDBFileReader
             {
                 _pdbFile = new PDBFile(fileDialog.FileName, 
                     new HexadecimalConverterStrategy());
+                pathTextBox.Text = fileDialog.FileName;
             }
         }
     }
