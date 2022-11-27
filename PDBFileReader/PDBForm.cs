@@ -1,23 +1,43 @@
 using FileReaderDomain;
 using FileReaderDomain.Strategy;
+using FileReaderDomain.Strategy.Abstract;
 
 namespace PDBFileReader
 {
     public partial class PDBForm : Form
     {
-        private PDBFile _pdbFile;
+        private IConverterStraregy _converterStrategy;
+        private string _filename;
         public PDBForm()
         {
             InitializeComponent();
+            SetHexadecimalConverterStrategy();
+        }
+
+        private void SetHexadecimalConverterStrategy()
+        {
+            hexadecimalToolStripMenuItem.Checked = true;
+            _converterStrategy = new HexadecimalConverterStrategy();
+
+            bytesToolStripMenuItem.Checked = false;
+        }
+        private void SetBytesConverterStrategy()
+        {
+            bytesToolStripMenuItem.Checked = true;
+            _converterStrategy = new BytesConverterStratagy();
+
+            hexadecimalToolStripMenuItem.Checked = false;
         }
 
         private async void loadButton_Click(object sender, EventArgs e)
         {
             try
             {
-                dataRichTextBox.Text    = await _pdbFile.GetDataFromPdbFileAsync();
-                pdbGuidTextBox.Text     = _pdbFile.TryReadPdbGuid().ToString();
-                pdbFileTypeTextBox.Text = await _pdbFile.GetFileTypeAsync();
+                var pdbFile = new PDBFile(_filename, _converterStrategy);
+
+                dataRichTextBox.Text    = await pdbFile.GetDataFromPdbFileAsync();
+                pdbGuidTextBox.Text     = pdbFile.TryReadPdbGuid().ToString();
+                pdbFileTypeTextBox.Text = await pdbFile.GetFileTypeAsync();
             }
             catch (Exception exception)
             {
@@ -38,8 +58,7 @@ namespace PDBFileReader
                 if (fileDialog.ShowDialog() == DialogResult.OK ||
                     String.IsNullOrEmpty(fileDialog.FileName) != true)
                 {
-                    _pdbFile = new PDBFile(fileDialog.FileName,
-                        new HexadecimalConverterStrategy());
+                    _filename = fileDialog.FileName;
 
                     var filePath = fileDialog.FileName.Split('\\');
                     pathTextBox.Text = filePath[filePath.Length - 1];
@@ -49,6 +68,26 @@ namespace PDBFileReader
             {
                 MessageBox.Show(exception.Message, "Error", 
                     MessageBoxButtons.CancelTryContinue, MessageBoxIcon.Error);
+            }
+        }
+
+        private void chooseFormatToolStripMenuItem_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            this.UpdateStatus(e.ClickedItem);
+        }
+
+        private void UpdateStatus(ToolStripItem item)
+        {
+            if (item != null)
+            {
+                if(item.Text == "Bytes")
+                {
+                    SetBytesConverterStrategy();
+                }
+                else if(item.Text == "Hexadecimal")
+                {
+                    SetHexadecimalConverterStrategy();
+                }
             }
         }
     }

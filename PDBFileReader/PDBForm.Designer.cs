@@ -41,22 +41,27 @@
             this.pdbGuidTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.chooseFormatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hexadecimalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bytesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pdbFileDateRichTextBox
+            // dataRichTextBox
             // 
             this.dataRichTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataRichTextBox.BackColor = System.Drawing.Color.White;
             this.dataRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.dataRichTextBox.Location = new System.Drawing.Point(12, 12);
-            this.dataRichTextBox.Name = "pdbFileDateRichTextBox";
+            this.dataRichTextBox.Location = new System.Drawing.Point(12, 31);
+            this.dataRichTextBox.Name = "dataRichTextBox";
             this.dataRichTextBox.ReadOnly = true;
-            this.dataRichTextBox.Size = new System.Drawing.Size(470, 466);
+            this.dataRichTextBox.Size = new System.Drawing.Size(470, 447);
             this.dataRichTextBox.TabIndex = 0;
             this.dataRichTextBox.Text = "";
             // 
@@ -69,9 +74,9 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.loadButton);
-            this.panel1.Location = new System.Drawing.Point(488, 12);
+            this.panel1.Location = new System.Drawing.Point(488, 31);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(283, 162);
+            this.panel1.Size = new System.Drawing.Size(283, 172);
             this.panel1.TabIndex = 1;
             // 
             // pathTextBox
@@ -129,9 +134,9 @@
             this.panel2.Controls.Add(this.pdbGuidTextBox);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Location = new System.Drawing.Point(488, 180);
+            this.panel2.Location = new System.Drawing.Point(488, 209);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(283, 298);
+            this.panel2.Size = new System.Drawing.Size(283, 269);
             this.panel2.TabIndex = 2;
             // 
             // pdbFileTypeTextBox
@@ -182,6 +187,42 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Additional info";
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.BackColor = System.Drawing.Color.Transparent;
+            this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.chooseFormatToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(783, 28);
+            this.menuStrip1.TabIndex = 3;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // chooseFormatToolStripMenuItem
+            // 
+            this.chooseFormatToolStripMenuItem.BackColor = System.Drawing.Color.Transparent;
+            this.chooseFormatToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.hexadecimalToolStripMenuItem,
+            this.bytesToolStripMenuItem});
+            this.chooseFormatToolStripMenuItem.Name = "chooseFormatToolStripMenuItem";
+            this.chooseFormatToolStripMenuItem.Size = new System.Drawing.Size(121, 24);
+            this.chooseFormatToolStripMenuItem.Text = "Choose format";
+            this.chooseFormatToolStripMenuItem.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.chooseFormatToolStripMenuItem_DropDownItemClicked);
+            // 
+            // hexadecimalToolStripMenuItem
+            // 
+            this.hexadecimalToolStripMenuItem.Name = "hexadecimalToolStripMenuItem";
+            this.hexadecimalToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.hexadecimalToolStripMenuItem.Text = "Hexadecimal";
+            // 
+            // bytesToolStripMenuItem
+            // 
+            this.bytesToolStripMenuItem.Name = "bytesToolStripMenuItem";
+            this.bytesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.bytesToolStripMenuItem.Text = "Bytes";
+            // 
             // PDBForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -190,6 +231,8 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dataRichTextBox);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "PDBForm";
             this.Text = "PDB file reader";
             this.panel1.ResumeLayout(false);
@@ -197,7 +240,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -215,5 +261,9 @@
         private Label label3;
         private TextBox pdbFileTypeTextBox;
         private Label label4;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem chooseFormatToolStripMenuItem;
+        private ToolStripMenuItem hexadecimalToolStripMenuItem;
+        private ToolStripMenuItem bytesToolStripMenuItem;
     }
 }
