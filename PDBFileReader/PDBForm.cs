@@ -13,35 +13,42 @@ namespace PDBFileReader
 
         private async void loadButton_Click(object sender, EventArgs e)
         {
-            string data = null, guid = null, fileType = null;
-
-            await Task.Run(() =>
+            try
             {
-                data = _pdbFile.GetDataFromPdbFile();
-                guid = _pdbFile.TryReadPdbGuid().ToString();
-                fileType = _pdbFile.GetFileType();
-            });
-
-            pdbFileDateRichTextBox.Text = data;
-            pdbGuidTextBox.Text         = guid;
-            pdbFileTypeTextBox.Text     = fileType;
+                dataRichTextBox.Text    = await _pdbFile.GetDataFromPdbFileAsync();
+                pdbGuidTextBox.Text     = _pdbFile.TryReadPdbGuid().ToString();
+                pdbFileTypeTextBox.Text = await _pdbFile.GetFileTypeAsync();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void chooseFile_Click(object sender, EventArgs e)
         {
-            var fileDialog = new OpenFileDialog();
-            fileDialog.Title = "Select pdb file";
-            fileDialog.InitialDirectory = @"C:\";
-            fileDialog.Filter = "(*.pdb) | *.pdb";
-
-            if(fileDialog.ShowDialog() == DialogResult.OK ||
-                String.IsNullOrEmpty(fileDialog.FileName) != true)
+            try
             {
-                _pdbFile = new PDBFile(fileDialog.FileName, 
-                    new HexadecimalConverterStrategy());
+                var fileDialog = new OpenFileDialog();
+                fileDialog.Title = "Select pdb file";
+                fileDialog.InitialDirectory = @"C:\";
+                fileDialog.Filter = "(*.pdb) | *.pdb";
 
-                var filePath = fileDialog.FileName.Split('\\');
-                pathTextBox.Text = filePath[filePath.Length - 1];
+                if (fileDialog.ShowDialog() == DialogResult.OK ||
+                    String.IsNullOrEmpty(fileDialog.FileName) != true)
+                {
+                    _pdbFile = new PDBFile(fileDialog.FileName,
+                        new HexadecimalConverterStrategy());
+
+                    var filePath = fileDialog.FileName.Split('\\');
+                    pathTextBox.Text = filePath[filePath.Length - 1];
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, "Error", 
+                    MessageBoxButtons.CancelTryContinue, MessageBoxIcon.Error);
             }
         }
     }

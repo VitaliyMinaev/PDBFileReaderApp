@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PDBForm));
-            this.pdbFileDateRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.dataRichTextBox = new System.Windows.Forms.RichTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pathTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -48,17 +48,17 @@
             // 
             // pdbFileDateRichTextBox
             // 
-            this.pdbFileDateRichTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dataRichTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pdbFileDateRichTextBox.BackColor = System.Drawing.Color.White;
-            this.pdbFileDateRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pdbFileDateRichTextBox.Location = new System.Drawing.Point(12, 12);
-            this.pdbFileDateRichTextBox.Name = "pdbFileDateRichTextBox";
-            this.pdbFileDateRichTextBox.ReadOnly = true;
-            this.pdbFileDateRichTextBox.Size = new System.Drawing.Size(470, 466);
-            this.pdbFileDateRichTextBox.TabIndex = 0;
-            this.pdbFileDateRichTextBox.Text = "";
+            this.dataRichTextBox.BackColor = System.Drawing.Color.White;
+            this.dataRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.dataRichTextBox.Location = new System.Drawing.Point(12, 12);
+            this.dataRichTextBox.Name = "pdbFileDateRichTextBox";
+            this.dataRichTextBox.ReadOnly = true;
+            this.dataRichTextBox.Size = new System.Drawing.Size(470, 466);
+            this.dataRichTextBox.TabIndex = 0;
+            this.dataRichTextBox.Text = "";
             // 
             // panel1
             // 
@@ -189,7 +189,7 @@
             this.ClientSize = new System.Drawing.Size(783, 490);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.pdbFileDateRichTextBox);
+            this.Controls.Add(this.dataRichTextBox);
             this.Name = "PDBForm";
             this.Text = "PDB file reader";
             this.panel1.ResumeLayout(false);
@@ -203,7 +203,7 @@
 
         #endregion
 
-        private RichTextBox pdbFileDateRichTextBox;
+        private RichTextBox dataRichTextBox;
         private Panel panel1;
         private Button loadButton;
         private PictureBox pictureBox1;

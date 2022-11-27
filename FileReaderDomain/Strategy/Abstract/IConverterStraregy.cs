@@ -2,5 +2,5 @@
 
 public interface IConverterStraregy
 {
-    public string ConvertFromBinary(byte[] data);
+    public Task<string> ConvertFromBinaryAsync(byte[] data);
 }

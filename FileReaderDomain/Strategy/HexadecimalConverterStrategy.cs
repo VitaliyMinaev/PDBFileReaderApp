@@ -9,15 +9,19 @@ namespace FileReaderDomain.Strategy;
 
 public class HexadecimalConverterStrategy : IConverterStraregy
 {
-    public string ConvertFromBinary(byte[] data)
+    public async Task<string> ConvertFromBinaryAsync(byte[] data)
     {
-        StringBuilder hex = new StringBuilder(data.Length * 2);
-
-        foreach (byte b in data)
+        return await Task.Run(() =>
         {
-            hex.AppendFormat("{0:x2}", b);
-            hex.Append(' ');
-        }
-        return hex.ToString();
+            StringBuilder hex = new StringBuilder(data.Length * 2);
+
+            foreach (byte b in data)
+            {
+                hex.AppendFormat("{0:x2}", b);
+                hex.Append(' ');
+            }
+
+            return hex.ToString();
+        });
     }
 }

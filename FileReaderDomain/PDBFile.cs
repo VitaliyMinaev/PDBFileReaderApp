@@ -1,10 +1,5 @@
 ﻿using FileReaderDomain.Strategy.Abstract;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FileReaderDomain;
 
@@ -20,21 +15,25 @@ public class PDBFile
 
     public PDBFile(string pathToPdbFile, IConverterStraregy converterStraregy)
     {
-        // Validation ...
+        if (ValidatePathToPdbFile(pathToPdbFile) == false)
+            throw new ArgumentException("Inappropriate path to pdb file");
+
         _pathToPdbFile = pathToPdbFile;
         _converterStraregy = converterStraregy;  
     }
 
     public void SetPathToPdbFile(string path)
     {
-        // Validation ...
+        if (ValidatePathToPdbFile(path) == false)
+            throw new ArgumentException("Inappropriate path to pdb file");
+
         _pathToPdbFile = path;
     }
 
-    public string GetDataFromPdbFile()
+    public async Task<string> GetDataFromPdbFileAsync()
     {
-        byte[] data = System.IO.File.ReadAllBytes(_pathToPdbFile);
-        return _converterStraregy.ConvertFromBinary(data);
+        byte[] data = await System.IO.File.ReadAllBytesAsync(_pathToPdbFile);
+        return await _converterStraregy.ConvertFromBinaryAsync(data);
     }
     public Guid TryReadPdbGuid()
     {
@@ -73,12 +72,13 @@ public class PDBFile
             return Guid.Empty;
         }
     }
-    public string GetFileType()
+    public async Task<string> GetFileTypeAsync()
     {
         using var streamReader = new StreamReader(_pathToPdbFile);
 
         char[] chars = new char[24];
-        var count = streamReader.Read(chars, 0, chars.Length);
+        var count = await streamReader.ReadAsync(chars, 0, chars.Length);
+
         if (count > 4 && new string(chars, 0, 4) == "BSJB")
         {
             return "Portable pdb";
@@ -93,5 +93,14 @@ public class PDBFile
         }
 
         return String.Empty;
+    }
+
+    protected bool ValidatePathToPdbFile(string filePath)
+    {
+        if (System.IO.File.Exists(filePath) == false ||
+            filePath.EndsWith(".pdb", StringComparison.OrdinalIgnoreCase) == false)
+            return false;
+
+        return true;
     }
 }
