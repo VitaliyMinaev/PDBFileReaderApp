@@ -44,7 +44,8 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.chooseFormatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hexadecimalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bytesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.decimalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.decodedAsciiRichTextBox = new System.Windows.Forms.RichTextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -53,15 +54,14 @@
             // 
             // dataRichTextBox
             // 
-            this.dataRichTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.dataRichTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataRichTextBox.BackColor = System.Drawing.Color.White;
             this.dataRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.dataRichTextBox.Location = new System.Drawing.Point(12, 31);
             this.dataRichTextBox.Name = "dataRichTextBox";
             this.dataRichTextBox.ReadOnly = true;
-            this.dataRichTextBox.Size = new System.Drawing.Size(470, 447);
+            this.dataRichTextBox.Size = new System.Drawing.Size(470, 310);
             this.dataRichTextBox.TabIndex = 0;
             this.dataRichTextBox.Text = "";
             // 
@@ -205,7 +205,7 @@
             this.chooseFormatToolStripMenuItem.BackColor = System.Drawing.Color.Transparent;
             this.chooseFormatToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.hexadecimalToolStripMenuItem,
-            this.bytesToolStripMenuItem});
+            this.decimalToolStripMenuItem});
             this.chooseFormatToolStripMenuItem.Name = "chooseFormatToolStripMenuItem";
             this.chooseFormatToolStripMenuItem.Size = new System.Drawing.Size(121, 24);
             this.chooseFormatToolStripMenuItem.Text = "Choose format";
@@ -214,20 +214,35 @@
             // hexadecimalToolStripMenuItem
             // 
             this.hexadecimalToolStripMenuItem.Name = "hexadecimalToolStripMenuItem";
-            this.hexadecimalToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.hexadecimalToolStripMenuItem.Size = new System.Drawing.Size(179, 26);
             this.hexadecimalToolStripMenuItem.Text = "Hexadecimal";
             // 
-            // bytesToolStripMenuItem
+            // decimalToolStripMenuItem
             // 
-            this.bytesToolStripMenuItem.Name = "bytesToolStripMenuItem";
-            this.bytesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.bytesToolStripMenuItem.Text = "Bytes";
+            this.decimalToolStripMenuItem.Name = "decimalToolStripMenuItem";
+            this.decimalToolStripMenuItem.Size = new System.Drawing.Size(179, 26);
+            this.decimalToolStripMenuItem.Text = "Decimal";
+            // 
+            // decodedAsciiRichTextBox
+            // 
+            this.decodedAsciiRichTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.decodedAsciiRichTextBox.BackColor = System.Drawing.Color.White;
+            this.decodedAsciiRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.decodedAsciiRichTextBox.Location = new System.Drawing.Point(12, 347);
+            this.decodedAsciiRichTextBox.Name = "decodedAsciiRichTextBox";
+            this.decodedAsciiRichTextBox.ReadOnly = true;
+            this.decodedAsciiRichTextBox.Size = new System.Drawing.Size(470, 131);
+            this.decodedAsciiRichTextBox.TabIndex = 4;
+            this.decodedAsciiRichTextBox.Text = "";
             // 
             // PDBForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(783, 490);
+            this.Controls.Add(this.decodedAsciiRichTextBox);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dataRichTextBox);
@@ -264,6 +279,7 @@
         private MenuStrip menuStrip1;
         private ToolStripMenuItem chooseFormatToolStripMenuItem;
         private ToolStripMenuItem hexadecimalToolStripMenuItem;
-        private ToolStripMenuItem bytesToolStripMenuItem;
+        private ToolStripMenuItem decimalToolStripMenuItem;
+        private RichTextBox decodedAsciiRichTextBox;
     }
 }

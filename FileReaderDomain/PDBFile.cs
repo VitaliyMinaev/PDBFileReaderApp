@@ -1,5 +1,6 @@
 ﻿using FileReaderDomain.Strategy.Abstract;
 using System.Reflection.Metadata;
+using System.Text;
 
 namespace FileReaderDomain;
 
@@ -30,11 +31,30 @@ public class PDBFile
         _pathToPdbFile = path;
     }
 
-    public async Task<string> GetDataFromPdbFileAsync()
+    public async Task<string> ConvertBytesToString(byte[] data)
     {
-        byte[] data = await System.IO.File.ReadAllBytesAsync(_pathToPdbFile);
         return await _converterStraregy.ConvertFromBinaryAsync(data);
     }
+    public async Task<byte[]> GetDataFromPdbFileAsync()
+    {
+        return await System.IO.File.ReadAllBytesAsync(_pathToPdbFile);
+    }
+    public async Task<string> GetStringFromASCII(byte[] data)
+    {
+        return await Task.Run(() =>
+        {
+            var stringBuilder = new StringBuilder();
+            for (int i = 0; i < data.Length; i++)
+            {
+                if (data[i] == 0 || data[i] == 1)
+                    continue;
+
+                stringBuilder.Append((char)data[i]);
+            }
+            return stringBuilder.ToString();
+        });
+    }
+
     public Guid TryReadPdbGuid()
     {
         try

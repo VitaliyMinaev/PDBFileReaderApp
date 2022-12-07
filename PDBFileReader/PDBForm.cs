@@ -19,11 +19,11 @@ namespace PDBFileReader
             hexadecimalToolStripMenuItem.Checked = true;
             _converterStrategy = new HexadecimalConverterStrategy();
 
-            bytesToolStripMenuItem.Checked = false;
+            decimalToolStripMenuItem.Checked = false;
         }
         private void SetBytesConverterStrategy()
         {
-            bytesToolStripMenuItem.Checked = true;
+            decimalToolStripMenuItem.Checked = true;
             _converterStrategy = new BytesConverterStratagy();
 
             hexadecimalToolStripMenuItem.Checked = false;
@@ -35,9 +35,12 @@ namespace PDBFileReader
             {
                 var pdbFile = new PDBFile(_filename, _converterStrategy);
 
-                dataRichTextBox.Text    = await pdbFile.GetDataFromPdbFileAsync();
-                pdbGuidTextBox.Text     = pdbFile.TryReadPdbGuid().ToString();
-                pdbFileTypeTextBox.Text = await pdbFile.GetFileTypeAsync();
+                byte[] data = await pdbFile.GetDataFromPdbFileAsync();
+
+                decodedAsciiRichTextBox.Text    = await pdbFile.GetStringFromASCII(data);
+                dataRichTextBox.Text            = await pdbFile.ConvertBytesToString(data);
+                pdbGuidTextBox.Text             = pdbFile.TryReadPdbGuid().ToString();
+                pdbFileTypeTextBox.Text         = await pdbFile.GetFileTypeAsync();
             }
             catch (Exception exception)
             {
